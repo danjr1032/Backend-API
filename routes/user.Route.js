@@ -3,8 +3,7 @@ const {createUser, getUserByPhone, login} = require ('../controller/user.Control
 const {User} = require ("../models/User")
 const userRoute = express.Router();
 
-// Define your user routes here
-userRoute.get('/', async (req, res) => {
+userRoute.get('/users', async (req, res) => {
   try {
     const users = await User.find({});
     res.send({ message: 'All users', users });
@@ -13,6 +12,8 @@ userRoute.get('/', async (req, res) => {
     res.status(500).send({ message: 'Error fetching users' });
   }
 });
+
+
 
 userRoute.post('/signup', createUser);
 userRoute.get('/:phone', getUserByPhone)
