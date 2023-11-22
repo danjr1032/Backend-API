@@ -5,7 +5,7 @@ const contactRoute = express.Router();
 
 contactRoute.get('/messages', async (req, res) => {
   try {
-    const messages = await Message.find();
+    const messages = await Message.find({});
     res.send({ message: 'All messages', messages });
   } catch (error) {
     console.error(error);
@@ -13,22 +13,6 @@ contactRoute.get('/messages', async (req, res) => {
   }
 });
 
-// contactRoute.post("/contact", async (req, res) => {
-//   const { name, email, message } = req.body;
-  
-//   try {
-//     const result = await createMessage(name, email, message);
-
-//     if (result.success) {
-//       res.send(result);
-//     } else {
-//       res.status(500).send(result);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send({ message: 'Internal Server Error' });
-//   }
-// });
 
 contactRoute.post('/contact', createMessage);
 
