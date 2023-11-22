@@ -6,7 +6,7 @@ const userRoute = express.Router();
 // Define your user routes here
 userRoute.get('/', async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find({});
     res.send({ message: 'All users', users });
   } catch (error) {
     console.error(error);
