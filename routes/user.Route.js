@@ -1,6 +1,6 @@
 const express = require('express');
 const {createUser, getUserByPhone, login} = require ('../controller/user.Controller');
-
+const {User} = require ("../models/User")
 const userRoute = express.Router();
 
 // Define your user routes here
