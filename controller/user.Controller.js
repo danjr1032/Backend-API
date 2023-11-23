@@ -21,7 +21,7 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
-    // res.status(201).json({ message: 'User created successfully', user: newUser });
+    res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
   }
@@ -65,8 +65,8 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: 'Invalid password' });
       }
   
-  
-      res.status(200).json({ message: 'Login successful', user });
+      res.redirect(201, "https://trashpoint.vercel.app/services.html");
+      // res.status(200).json({ message: 'Login successful', user });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
