@@ -10,7 +10,8 @@ exports.createMessage = async (req, res) => {
       const newMessage = new Message({ name, email, message });
 
       await newMessage.save();
-      res.json({ message: 'Message saved successfully' });
+      // res.json({ message: 'Message saved successfully'});
+      res.redirect("https://trashpoint.vercel.app/index.html");
     } else {
       res.status(400).json({ error: 'Name, email, and message are required' });
     }
