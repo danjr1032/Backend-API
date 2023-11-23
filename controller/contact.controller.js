@@ -5,9 +5,9 @@ const Message = require ('../models/contact');
     try {
       const { name, email, message } = req.body;
 
-      if (!name || !email || !message) {
-        res.status(400).json({ error: 'Please provide name, email, and message.' });
-      }
+      // if (!name || !email || !message) {
+      //   res.status(400).json({ error: 'Please provide name, email, and message.' });
+      // }
       const newMessage = new Message({
         name,
         email,
