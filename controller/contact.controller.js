@@ -1,5 +1,4 @@
 
-// const validateMessage = require ("../middleware/validatemessage");
 const Message = require('../models/contact');
 
 exports.createMessage = async (req, res) => {
@@ -9,12 +8,14 @@ exports.createMessage = async (req, res) => {
     if (!name || !email || !message) {
       return res.status(400).json({ success: false, error: 'All fields are required' });
     }
+    else {
+      const newMessage = new Message({ name, email, message });
+  
+      await newMessage.save();
+      res.status(201).json({ success: true, message: 'Message saved successfully' });
+      res.redirect("https://trashpoint.vercel.app/index.html");
+    }
 
-    const newMessage = new Message({ name, email, message });
-
-    await newMessage.save();
-    res.status(201).json({ success: true, message: 'Message saved successfully' });
-    res.redirect("https://trashpoint.vercel.app/index.html");
     
   } catch (error) {
     console.error(error);
