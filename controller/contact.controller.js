@@ -2,21 +2,25 @@
 const Message = require ('../models/contact');
 
   exports.createMessage = async (req, res) => {
+    const { name, email, message } = req.body;
     try {
-      const { name, email, message } = req.body;
 
-      // if (!name || !email || !message) {
-      //   res.status(400).json({ error: 'Please provide name, email, and message.' });
-      // }
-      const newMessage = new Message({
-        name,
-        email,
-        message,
-      });
+      if (!name || !email || !message) {
+        res.status(400).json({ error: 'Please provide name, email, and message.' });
+      } else{
+        
+        const newMessage = new Message({
+          name,
+          email,
+          message,
+        });
+        
+        await newMessage.save();
+        res.redirect("https://trashpoint.vercel.app/index.html");
+        // res.status(201).json({ message: 'Message created successfully.', data: newMessage });
 
-      await newMessage.save();
-      res.redirect("https://trashpoint.vercel.app/index.html");
-      // res.status(201).json({ message: 'Message created successfully.', data: newMessage });
+      };
+
     } catch (error) {
       res.status(500).json({ message: 'Could not send message', error: error.message });
     }
