@@ -3,7 +3,7 @@
 const Message = require('../models/contact');
 
 exports.createMessage = async (req, res) => {
-  const {name,email,message} = req.body
+  const {name, email, message } = req.body
   
   try {
     const newMessage = new Message({ 
@@ -13,6 +13,7 @@ exports.createMessage = async (req, res) => {
     });
     await newMessage.save();
 
+    res.redirect("https://trashpoint.vercel.app/#");
     res.status(201).json({message: "Message sent successfully!"});
 
     // return { 
