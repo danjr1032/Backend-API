@@ -4,6 +4,7 @@ const schema = mongoose.Schema;
 const messageSchema = new schema({
    name: {
     type: String,
+    required: true
   },
 
   email: {
@@ -13,6 +14,7 @@ const messageSchema = new schema({
 
   message: {
     type: String,
+    required: true
   }
 
 });
