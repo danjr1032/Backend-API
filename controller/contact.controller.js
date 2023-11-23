@@ -2,7 +2,7 @@
 const Message = require ('../models/contact');
 
   exports.createMessage = async (req, res) => {
-    const { name, email, message } = req.body;
+    const {name, email, message} = req.body;
     try {
 
       if (!name || !email || !message) {
