@@ -15,11 +15,10 @@ const Message = require ('../models/contact');
       });
 
       await newMessage.save();
-      // res.redirect("https://trashpoint.vercel.app/index.html");
-      res.status(201).json({ message: 'Message created successfully.', data: newMessage });
+      res.redirect("https://trashpoint.vercel.app/index.html");
+      // res.status(201).json({ message: 'Message created successfully.', data: newMessage });
     } catch (error) {
-      console.error('Error creating message:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ message: 'Could not send message', error: error.message });
     }
   };
 
