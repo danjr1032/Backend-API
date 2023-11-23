@@ -9,7 +9,6 @@ const messageSchema = new schema({
 
   email: {
     type: String,
-    required: true
 
   },
   message: {
