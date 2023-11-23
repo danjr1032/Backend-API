@@ -6,7 +6,7 @@ exports.createMessage = async (req, res) => {
   // const { name, email, message } = req.body;
   const name =req.body.name;
   const email =req.body.email;
-  const nessage =req.body.message;
+  const message =req.body.message;
 
   try {
     if (name !== "" && email !== "" && message !== "") {

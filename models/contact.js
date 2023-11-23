@@ -12,12 +12,11 @@ const messageSchema = new schema({
     required: true
 
   },
-
   message: {
     type: String,
     required: true
 
-  }
+  },
 
 });
 
