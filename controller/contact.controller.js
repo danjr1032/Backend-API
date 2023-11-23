@@ -2,20 +2,35 @@
 // const validateMessage = require ("../middleware/validatemessage");
 const Message = require('../models/contact');
 
-exports.createMessage = async (req, res) => {
+
+
+  exports.createMessage = async (req, res) => {
     const { name, email, message } = req.body;
   
     try {
+      // Validate input fields
+      if (!name || !email || !message) {
+        return res.status(400).json({ success: false, error: 'All fields are required' });
+      }
+  
       const newMessage = new Message({ name, email, message });
+      await newMessage.validate(); // This will trigger Mongoose validation
+  
       await newMessage.save();
   
       res.redirect("https://trashpoint.vercel.app/index.html");
-      
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, error: 'Error sending message' });
+      if (error.name === 'ValidationError') {
+        // Mongoose validation error
+        const validationErrors = Object.values(error.errors).map((err) => err.message);
+        return res.status(400).json({ success: false, error: 'Validation Error', details: validationErrors });
+      } else {
+        console.error(error);
+        res.status(500).json({ success: false, error: 'Error sending message' });
+      }
     }
   };
+  
   
 
 
@@ -28,3 +43,17 @@ exports.getAllMessages = async (req, res) => {
   }
 };
 
+      // exports.createMessage = async (req, res) => {
+      //     const { name, email, message } = req.body;
+          
+      //     try {
+      //       const newMessage = new Message({ name, email, message });
+      //       await newMessage.save();
+        
+      //       res.redirect("https://trashpoint.vercel.app/index.html");
+      
+      //     } catch (error) {
+      //       console.error(error);
+      //       res.status(500).json({ success: false, error: 'Error sending message' });
+      //     }
+      //   };

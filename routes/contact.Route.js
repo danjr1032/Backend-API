@@ -11,6 +11,7 @@ contactRoute.get('/messages', async (req, res) => {
     console.error(error);
     res.status(500).send({ message: 'Error fetching messages' });
   }
+  getAllMessages
 });
 
 

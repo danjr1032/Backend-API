@@ -10,8 +10,6 @@ const messageSchema = new schema({
   email: {
     type: String,
     require: true,
-    lowercase: true,
-    trim: true,
   },
 
   message: {
