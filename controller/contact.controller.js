@@ -6,7 +6,7 @@ const Message = require ('../models/contact');
       const { name, email, message } = req.body;
 
       if (!name || !email || !message) {
-        return res.status(400).json({ error: 'Please provide name, email, and message.' });
+        res.status(400).json({ error: 'Please provide name, email, and message.' });
       }
       const newMessage = new Message({
         name,
@@ -23,7 +23,7 @@ const Message = require ('../models/contact');
     }
   };
 
-  
+
   exports.getAllMessages = async (req, res) => {
     try {
       const messages = await Message.find();
