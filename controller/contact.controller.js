@@ -9,7 +9,7 @@ exports.createMessage = async (req, res) => {
   const message =req.body.message;
 
   try {
-    if (name !== "" && email !== "" && message !== "") {
+    if (name?.trim() !== "" && email?.trim() !== "" && message?.trim() !== ""){
       const newMessage = new Message({ name, email, message });
 
       await newMessage.save();
@@ -19,7 +19,6 @@ exports.createMessage = async (req, res) => {
       res.status(400).json({ error: 'Name, email, and message are required' });
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Error sending message' });
   }
 };

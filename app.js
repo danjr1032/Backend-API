@@ -7,7 +7,7 @@ const bodyParser = require ('body-parser');
 // const dotenv = require ('dotenv');
 const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
-const contactRoute = require ("./routes/contact.Route");
+const Router = require ("./routes/contact.Route");
 
 const app = express();
 
@@ -25,7 +25,7 @@ const corsOptions = {
 
 app.use('/', userRoute);
 app.use('/', pickupRoute);
-app.use('/', contactRoute);
+app.use('/', Router);
   
 
 

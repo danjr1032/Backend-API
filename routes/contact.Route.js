@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require ("express");
 const { createMessage, getAllMessages } = require("../controller/contact.controller");
 
-const contactRoute = express.Router();
+const Router = express.Router();
 
-contactRoute.get('/messages', async (req, res) => {
+Router.get('/messages', async (req, res) => {
   try {
     const messages = await Message.find({});
     res.send({ message: 'All messages', messages });
@@ -15,6 +15,6 @@ contactRoute.get('/messages', async (req, res) => {
 });
 
 
-contactRoute.post('/contact', createMessage);
+Router.post('/send', createMessage);
 
-module.exports = contactRoute;
+module.exports = Router;
