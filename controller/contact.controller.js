@@ -16,7 +16,7 @@ exports.createMessage = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error saving message' });
+    res.status(500).json({ error: 'Error sending message' });
   }
 };
 
