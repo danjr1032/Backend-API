@@ -1,77 +1,27 @@
+const express = require('express');
+const Message = require('../models/contact');
 
-const Message = require ('../models/contact');
 
-
-exports.createMessage = async (req, res) => {
-  // const { name, email, message } = req.body;
-  const name =req.body.name;
-  const email =req.body.email;
-  const message =req.body.message;
-
+// router.get('/messages', 
+exports.messages = async (req, res) => {
   try {
-    if (name?.trim() !== "" && email?.trim() !== "" && message?.trim() !== ""){
-      const newMessage = new Message({ name, email, message });
-
-      await newMessage.save();
-      // res.json({ message: 'Message saved successfully'});
-      res.redirect("https://trashpoint.vercel.app/index.html");
-    } else {
-      res.status(400).json({ error: 'Name, email, and message are required' });
-    }
+    const messages = await Message.find();
+    res.json(messages);
   } catch (error) {
-    res.status(500).json({ error: 'Error sending message' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
+// router.post('/send',
+exports.sendMessage = async (req, res) => {
+  const { name, email, message } = req.body;
 
-  exports.getAllMessages = async (req, res) => {
-    try {
-      const messages = await Message.find();
-      res.status(200).json({ data: messages });
-    } 
-    catch (error) {
-      console.error('Error fetching messages:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  };
+  try {
+    const newMessage = new Message({ name, email, message });
+    const savedMessage = await newMessage.save();
+    res.status(201).json(savedMessage);
+  } catch (error) {
+    res.status(400).json({ error: 'Bad Request' });
+  }
+};
 
-
-
-
-
-
-
-// exports.getAllMessages = async (req, res) => {
-//   try {
-//     const messages = await Message.find();
-//     res.json({ success: true, data: messages });
-//   } catch (error) {
-//     res.json({ success: false, error});
-//   }
-// };
-
- 
-// exports.createMessage = async (req, res) => {
-//   const {name, email, message} = req.body;
-//   try {
-
-//     if (!name || !email || !message) {
-//       res.status(400).json({ error: 'Please provide name, email, and message.' });
-//     } else{
-      
-//       const newMessage = new Message({
-//         name,
-//         email,
-//         message,
-//       });
-      
-//       await newMessage.save();
-//       res.redirect("https://trashpoint.vercel.app/index.html");
-//       // res.status(201).json({ message: 'Message created successfully.', data: newMessage });
-
-//     };
-
-//   } catch (error) {
-//     res.status(500).json({ message: 'Could not send message', error: error.message });
-//   }
-// };

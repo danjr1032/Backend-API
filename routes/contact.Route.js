@@ -1,6 +1,5 @@
 const express = require ("express");
-const { createMessage, getAllMessages } = require("../controller/contact.controller");
-
+const { sendMessage, messages } = require("../controller/contact.controller");
 const Router = express.Router();
 
 Router.get('/messages', async (req, res) => {
@@ -11,10 +10,21 @@ Router.get('/messages', async (req, res) => {
     console.error(error);
     res.status(500).send({ message: 'Error fetching messages' });
   }
-  getAllMessages
+  messages
 });
 
+Router.post('/send', async (req, res) => {
+  const { name, email, message } = req.body;
 
-Router.post('/send', createMessage);
+  try {
+    const newMessage = new Message({ name, email, message });
+    const savedMessage = await newMessage.save();
+    res.status(201).json(savedMessage);
+  } catch (error) {
+    res.status(400).json({ error: 'Bad Request' });
+  }
+  sendMessage
+});
+
 
 module.exports = Router;
