@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: 'Invalid password' });
       }
   
-      res.redirect(201, "https://trashpoint.vercel.app/services.html");
+      // res.redirect(201, "https://trashpoint.vercel.app/services.html");
       // res.status(200).json({ message: 'Login successful', user });
     } catch (error) {
       console.error(error);
