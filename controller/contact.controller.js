@@ -9,7 +9,8 @@ exports.createMessage = async (req, res) => {
       const newMessage = new Message({ name, email, message });
       await newMessage.save();
   
-      res.redirect("https://trashpoint.vercel.app/#");
+      res.redirect("https://trashpoint.vercel.app/index.html");
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({ success: false, error: 'Error sending message' });
