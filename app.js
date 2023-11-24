@@ -14,9 +14,11 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 const corsOptions = {
     "origin": "http://localhost:5500",
-    "method": "GET, POST, PATCH, PUT, DELETE",
+    "method": "POST, GET, PATCH, PUT, DELETE",
     "preflightContinue": false,
     "optionSuccessStatus": 204
 };
