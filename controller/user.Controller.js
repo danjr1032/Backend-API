@@ -50,50 +50,11 @@ const comparePassword = async (password, hashedPassword) => {
   }
 };
 
-// exports.login = async (req, res) => {
-//   const { phone, password } = req.body;
-
-//   if (!phone || !password) {
-//     return res.status(400).json({ message: 'All fields are required!' });
-//   }
-
-//   try {
-//     const user = await User.findOne({ phone });
-
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     const isPasswordValid = await comparePassword(password, user.password);
-
-//     if (!isPasswordValid) {
-//       return res.status(401).json({ message: 'Incorrect password' });
-//     }
-
-
-//     req.session.user = {
-//       id: user.id,
-//       phone: user.phone,
-//       password: hashPassword
-//     };
-
-//     req.session.save(function (err) {
-//       if (err) return next(err)
-//       // res.redirect('/')
-//     })
-//     // Redirect after successful login
-//     res.redirect("https://trashpoint.vercel.app/services.html");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// };
 
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
 
   if (!phone || !password) {
-    // alert("all fields are required");
     return res.status(400).json({ message: 'All fields are required!' });
   }
 
@@ -101,17 +62,16 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ phone });
 
     if (!user) {
-      return res.json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-
-    const isPasswordValid = await comparePassword(password, user.password);
-
-    if (!isPasswordValid) {
-      alert("Incorrect password");
-      // return res.json({ message: 'Incorrect password' });
+    if (user) {      
+      const isPasswordValid = await comparePassword(password, user.password);
+  
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Incorrect password' });
+      }      
       res.redirect("https://trashpoint.vercel.app/services.html");
     }
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -137,3 +97,42 @@ exports.getUserByPhone = async (req, res) => {
 };
 
 
+
+  // exports.login = async (req, res) => {
+  //   const { phone, password } = req.body;
+  
+  //   if (!phone || !password) {
+  //     return res.status(400).json({ message: 'All fields are required!' });
+  //   }
+  
+  //   try {
+  //     const user = await User.findOne({ phone });
+  
+  //     if (!user) {
+  //       return res.status(404).json({ message: 'User not found' });
+  //     }
+  
+  //     const isPasswordValid = await comparePassword(password, user.password);
+  
+  //     if (!isPasswordValid) {
+  //       return res.status(401).json({ message: 'Incorrect password' });
+  //     }
+  
+  
+  //     req.session.user = {
+  //       id: user.id,
+  //       phone: user.phone,
+  //       password: hashPassword
+  //     };
+  
+  //     req.session.save(function (err) {
+  //       if (err) return next(err)
+  //       // res.redirect('/')
+  //     })
+  //     // Redirect after successful login
+  //     res.redirect("https://trashpoint.vercel.app/services.html");
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ message: 'Server error' });
+  //   }
+  // };

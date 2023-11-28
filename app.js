@@ -8,7 +8,7 @@ const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
 const Router = require ("./routes/contact.Route");
 const authRouter = require('./middleware/auth');
-// const session = require('express-session')
+const session = require('express-session');
 // const dotenv = require ('dotenv');
 // const jsonwebtoken = require ('jsonwebtoken');
 
