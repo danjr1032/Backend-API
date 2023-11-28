@@ -54,8 +54,13 @@ const comparePassword = async (password, hashedPassword) => {
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
 
-  if (!phone || !password) {
-    return res.status(400).json({ message: 'All fields are required!' });
+  if (phone==="" && password==="") {
+    alert('All fields are required..');
+    // return res.status(400).json({ message: 'All fields are required!' });
+  }else if (phone==="") {
+    alert('Please enter phone');
+  }else if (password==="") {
+    alert('Please enter password')
   }
 
   try {
