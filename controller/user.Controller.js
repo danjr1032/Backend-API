@@ -119,16 +119,6 @@ exports.getUserByPhone = async (req, res) => {
   //     }
   
   
-  //     req.session.user = {
-  //       id: user.id,
-  //       phone: user.phone,
-  //       password: hashPassword
-  //     };
-  
-  //     req.session.save(function (err) {
-  //       if (err) return next(err)
-  //       // res.redirect('/')
-  //     })
   //     // Redirect after successful login
   //     res.redirect("https://trashpoint.vercel.app/services.html");
   //   } catch (error) {

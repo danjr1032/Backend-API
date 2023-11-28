@@ -8,7 +8,7 @@ const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
 const Router = require ("./routes/contact.Route");
 const authRouter = require('./middleware/auth');
-const session = require('express-session');
+
 // const dotenv = require ('dotenv');
 // const jsonwebtoken = require ('jsonwebtoken');
 
@@ -17,17 +17,12 @@ const session = require('express-session');
 
 const app = express();
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(session({
-//     secret: '$$$19274bad%%good##@2*0*2*3', 
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { secure: true },
-// }));
+
 
 
 const corsOptions = {
