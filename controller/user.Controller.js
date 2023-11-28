@@ -55,12 +55,12 @@ exports.login = async (req, res) => {
   const { phone, password } = req.body;
 
   if (phone==="" && password==="") {
-    alert('All fields are required..');
+    res.send("message: All fields are required..")
     // return res.status(400).json({ message: 'All fields are required!' });
   }else if (phone==="") {
-    alert('Please enter phone');
+    res.send("Please enter phone")
   }else if (password==="") {
-    alert('Please enter password')
+    res.send("message: Please enter password")
   }
 
   try {
@@ -80,6 +80,7 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
+    aler
   }
 };
 
