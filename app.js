@@ -11,6 +11,7 @@ const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
 const Router = require ("./routes/contact.Route");
 const authRouter = require('./middleware/auth');
+const userSessionMiddleware = require ('./middleware/userSession');
 
 const app = express();
 app.use(passport.initialize());
@@ -24,9 +25,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { secure: true },
-    cookie: { maxAge: 60000 }
-
-  }));
+    userSessionMiddleware
+}));
 
 
 const corsOptions = {
