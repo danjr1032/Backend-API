@@ -7,9 +7,9 @@ const passport = require ('passport')
 const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
 const Router = require ("./routes/contact.Route");
+const authRouter = require('./middleware/auth');
 // const session = require('express-session')
 // const dotenv = require ('dotenv');
-// const authRouter = require('./middleware/auth');
 // const jsonwebtoken = require ('jsonwebtoken');
 
 
