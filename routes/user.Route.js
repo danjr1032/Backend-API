@@ -19,6 +19,21 @@ userRoute.post('/signup', createUser);
 userRoute.get('/:phone', getUserByPhone)
 userRoute.post("/login", login)
 
-// You can define more routes as needed
+userRoute.get('/profile', (req, res) => {
+  if (req.session.user) {
+    res.send(`Welcome, ${req.session.user.username}!`);
+  } else {
+    res.status(401).send('Unauthorized. Please log in.');
+  }
+});
 
+userRoute.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send('Logout successful');
+    }
+  });
+});
 module.exports = userRoute;
