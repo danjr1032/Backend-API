@@ -2,16 +2,18 @@ const express = require ( 'express');
 const mongoose = require ('mongoose');
 const bcryptjs = require ('bcryptjs')
 const cors = require ('cors');
-// const jsonwebtoken = require ('jsonwebtoken');
 const bodyParser = require ('body-parser');
-const session = require('express-session')
 const passport = require ('passport')
-// const dotenv = require ('dotenv');
 const userRoute = require ('./routes/user.Route');
 const pickupRoute = require('./routes/pickup.Route');
 const Router = require ("./routes/contact.Route");
-const authRouter = require('./middleware/auth');
-const userSessionMiddleware = require ('./middleware/userSession');
+// const session = require('express-session')
+// const dotenv = require ('dotenv');
+// const authRouter = require('./middleware/auth');
+// const jsonwebtoken = require ('jsonwebtoken');
+
+
+
 
 const app = express();
 app.use(passport.initialize());
@@ -20,13 +22,12 @@ app.use(passport.session());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
-    secret: '$$$19274bad%%good##@2*0*2*3', 
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true },
-    userSessionMiddleware
-}));
+// app.use(session({
+//     secret: '$$$19274bad%%good##@2*0*2*3', 
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: true },
+// }));
 
 
 const corsOptions = {

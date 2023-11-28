@@ -109,20 +109,9 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       alert("Incorrect password");
       // return res.json({ message: 'Incorrect password' });
-    }
-
-    req.session.user = {
-      id: user.id,
-      phone: user.phone,
-    };
-
-    req.session.save((err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ message: 'Error saving session' });
-      }
       res.redirect("https://trashpoint.vercel.app/services.html");
-    });
+    }
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
