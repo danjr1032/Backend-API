@@ -56,7 +56,6 @@ exports.login = async (req, res) => {
 
   if (phone==="" && password==="") {
     res.send("message: All fields are required..")
-    // return res.status(400).json({ message: 'All fields are required!' });
   }else if (phone==="") {
     res.send("Please enter phone")
   }else if (password==="") {
