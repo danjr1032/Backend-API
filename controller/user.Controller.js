@@ -22,7 +22,7 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
-    res.redirect("https://trashpoint.vercel.app/services.html");
+    res.redirect("https://trashpoint.vercel.app/dashboard.html");
     // res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
@@ -74,7 +74,7 @@ exports.login = async (req, res) => {
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Incorrect password' });
       }      
-      res.redirect("https://trashpoint.vercel.app/services.html");
+      res.redirect("https://trashpoint.vercel.app/dashboard.html");
     }
   } catch (error) {
     console.error(error);

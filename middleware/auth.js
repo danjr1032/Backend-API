@@ -12,7 +12,6 @@ passport.use(new GoogleStrategy({
   clientSecret: CLIENT_SECRET,
   callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
   passReqToCallback: true,
-  scope: ["profile"]
 }, async (accessToken, refreshToken, profile, done) => {
   // const user = {
   //   fullName: profile.displayName,
