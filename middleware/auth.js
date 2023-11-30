@@ -10,7 +10,7 @@ const CLIENT_SECRET = "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";
 passport.use(new GoogleStrategy({
   clientID: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
-  callbackURL: "http://localhost:5500/auth/google/callback", 
+  callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
   passReqToCallback: true,
   scope: ["profile"]
 }, async (accessToken, refreshToken, profile, done) => {
