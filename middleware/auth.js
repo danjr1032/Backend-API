@@ -13,12 +13,12 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
   passReqToCallback: true,
 }, async (accessToken, refreshToken, profile, done) => {
-  // const user = {
-  //   fullName: profile.displayName,
-  //   phoneNumber: profile.phoneNumber || null,
-  // };  
-  console.log('PROFILE',profile);
-  // return done(null, user);
+  const user = {
+    fullName: profile.displayName,
+    phoneNumber: profile.phoneNumber || null,
+  };  
+  return done(null, user);
+  // console.log('PROFILE',profile);
 }));
   
   passport.serializeUser((user, done) => {
