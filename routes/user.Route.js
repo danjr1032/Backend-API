@@ -18,5 +18,15 @@ userRoute.get('/users', async (req, res) => {
 userRoute.post('/signup', createUser);
 userRoute.get('/:phone', getUserByPhone)
 userRoute.post("/login", login)
+userRoute.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error logging out');
+    } else {
+      res.send('Logged out successfully');
+    }
+  });
+});
 
 module.exports = userRoute;

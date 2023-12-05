@@ -22,8 +22,8 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
-    res.redirect("https://trashpoint.vercel.app/dashboard.html");
-    // res.status(201).json({ message: 'User created successfully', user: newUser });
+    // res.redirect("https://trashpoint.vercel.app/dashboard.html");
+    res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
   }
@@ -51,15 +51,12 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 
+
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
 
-  if (phone==="" && password==="") {
-    res.send("message: All fields are required..")
-  }else if (phone==="") {
-    res.send("Please enter phone")
-  }else if (password==="") {
-    res.send("message: Please enter password")
+  if (phone === '' || password === '') {
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
@@ -68,21 +65,24 @@ exports.login = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    if (user) {      
-      const isPasswordValid = await comparePassword(password, user.password);
-  
-      if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Incorrect password' });
-      }      
-      res.redirect("https://trashpoint.vercel.app/dashboard.html");
+
+    const isPasswordValid = await comparePassword(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Incorrect password' });
     }
+
+    req.session.user = {
+      _id: user._id,
+      phone: user.phone,
+    };
+    // res.redirect('https://trashpoint.vercel.app/dashboard.html');
+    res.json({ success: true, message: 'Login successful', user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
-    aler
   }
 };
-
 
 
 exports.getUserByPhone = async (req, res) => {

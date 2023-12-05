@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const {google} = require ('googleapis')
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const authRouter = express.Router();
 const CLIENT_ID = "160039151190-5opijv1tlg60ibc0l9tq327s5ebfjm9b.apps.googleusercontent.com";
@@ -12,33 +12,29 @@ passport.use(new GoogleStrategy({
   clientSecret: CLIENT_SECRET,
   callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
   passReqToCallback: true,
-}, async (accessToken, refreshToken, profile, done) => {
-  const user = {
-    fullName: profile.displayName,
-    phoneNumber: profile.phoneNumber || null,
-  };  
-  return done(null, user);
-  // console.log('PROFILE',profile);
-}));
+}, function(accessToken, refreshToken, profile, done) {
+  userProfile=profile;
+  return done(null, userProfile);
+}
+));
   
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-  
-  passport.deserializeUser((id, done) => {
-    const user = getUserById(id);
-    done(null, user);
-  });
+passport.serializeUser(function(user, callback) {
+  callback(null, user);
+});
+
+passport.deserializeUser(function(obj, callback) {
+  callback(null, obj);
+});
   
   authRouter.get('/auth/google',
-    passport.authenticate('google', { scope: ["email"]})
+    passport.authenticate('google', { scope : ['profile', 'email'] })
   );
   
   authRouter.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req, res) => {
-      // res.redirect("https://trashpoint.vercel.app/Dashboard");
-    }
+  passport.authenticate('google', { failureRedirect: '/error' }),
+  function(req, res) {
+    // Successful authentication, redirect success.
+    res.redirect('/dashboard')}
   );
   
 
