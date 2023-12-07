@@ -105,8 +105,7 @@ exports.login = async (req, res) => {
       _id: user._id,
       phone: user.phone,
     };
-    // res.redirect('/dashboard');
-    res.redirect('https://trashpoint.vercel.app/dashboard.html');
+    // res.redirect('https://trashpoint.vercel.app/dashboard.html');
     res.json({ success: true, message: 'Login successful', user });
   } catch (error) {
     console.error(error);
