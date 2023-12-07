@@ -10,9 +10,8 @@ const userRoute = require ('./routes/user.Route');
 const requestRouter = require('./routes/request.Route');
 const Router = require ("./routes/contact.Route");
 const authRouter = require('./middleware/auth');
+require('dotenv').config();
 
-
-// const dotenv = require ('dotenv');
 // const jwt = require ('jsonwebtoken');
 
 
@@ -23,7 +22,7 @@ const authRouter = require('./middleware/auth');
 
 const app = express();
 const store = new MongoDBStore({
-    uri:"mongodb+srv://tapjidan:Gutet2023@trashpoint.qsmced1.mongodb.net/trashdb?retryWrites=true&w=majority",
+    uri:process.env.MONGO_URI,
     collection: 'mySessions'
   });
   
@@ -39,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
     session({
-      secret: 'iamtryingmybesttobeadeveloper', 
+      secret: process.env.SESSION_SECRET, 
       resave: true,
       saveUninitialized: true,
       store: store,
@@ -64,9 +63,8 @@ app.use('/request',  requestRouter);
 app.use('/contact', Router);
 app.use('/', authRouter)
 
-const mongoURI = "mongodb+srv://tapjidan:Gutet2023@trashpoint.qsmced1.mongodb.net/trashdb?retryWrites=true&w=majority";
 
-mongoose.connect(mongoURI, { 
+mongoose.connect(process.env.MONGO_URI, { 
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
 })

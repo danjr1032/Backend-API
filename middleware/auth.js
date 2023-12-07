@@ -1,16 +1,16 @@
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+require('dotenv').config()
 
 const authRouter = express.Router();
-const CLIENT_ID = "160039151190-c19gfg1l08n95359jgatdlgu3ic6uja1.apps.googleusercontent.com ";
-const CLIENT_SECRET = "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";
+
 
 passport.use(new GoogleStrategy({
-  clientID: CLIENT_ID,
-  clientSecret: CLIENT_SECRET,
-  // callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
-  callbackURL: "http://localhost:5500/auth/google/callback", 
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: "https://trashpoint.onrender.com/auth/google/callback", 
+  // callbackURL: "http://localhost:5500/auth/google/callback", 
   passReqToCallback: true,
 }, function(request, accessToken, refreshToken, profile, done) {
   User.findOrCreate({ googleId: profile.id }, function (err, user) {
