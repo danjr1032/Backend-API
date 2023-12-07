@@ -10,11 +10,13 @@ const userRoute = require ('./routes/user.Route');
 const requestRouter = require('./routes/request.Route');
 const Router = require ("./routes/contact.Route");
 const authRouter = require('./middleware/auth');
-const validateRequest = require ('./middleware/validatePickup');
 
 
 // const dotenv = require ('dotenv');
 // const jwt = require ('jsonwebtoken');
+
+
+
 
 
 
@@ -57,9 +59,9 @@ const corsOptions = {
 
 
 
-app.use('/', userRoute);
-app.use('/', validateRequest, requestRouter);
-app.use('/', Router);
+app.use('/user', userRoute);
+app.use('/request',  requestRouter);
+app.use('/contact', Router);
 app.use('/', authRouter)
 
 const mongoURI = "mongodb+srv://tapjidan:Gutet2023@trashpoint.qsmced1.mongodb.net/trashdb?retryWrites=true&w=majority";

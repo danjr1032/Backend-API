@@ -1,22 +1,22 @@
 
 const Request = require('../models/Request');
-
+const User = require ('../models/User');
+const validateRequest = require ('../middleware/validateRequest');
 
 
 exports.createRequest = async (req, res) => {
-  const { requestType,location, date, time } = req.body;
-  // const UserId = req.user._id; 
+  const { requestType, location, date, time } = req.body;
+  const userId = req.params.userId;
+
   try {
-
-    const isoDate = new Date(date);
-
-    const newRequest = new Request({ requestType, location, date: isoDate, time });
-
-    // const [day, month, year] = date.split('-');
-    // const isoDate = new Date(`${day}-${month}-${year}T00:00:00.000Z`);
-    // const newRequest = new Request({requestType, location, date: isoDate, time });
-    
+    const isoDate = new Date('2023-12-07T00:00:00.000Z');
+    if (isNaN(isoDate.valueOf())) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+    const newRequest = new Request({ UserId: userId, requestType, location, date: isoDate, time });
     await newRequest.save();
+
+    await User.findByIdAndUpdate(userId, { $push: { requests: newRequest._id } });
 
     res.status(201).json({ message: 'Request successful', Request: newRequest });
   } catch (error) {
@@ -25,14 +25,10 @@ exports.createRequest = async (req, res) => {
   }
 };
 
-
-
-
 exports.getUserRequests = async (req, res) => {
-  const UserId = req.user._id; 
-
+  const userId = req.userId;
   try {
-    const userRequests = await Request.find({ UserId });
+    const userRequests = await Request.find({ UserId: userId });
 
     res.json({ success: true, requests: userRequests });
   } catch (error) {

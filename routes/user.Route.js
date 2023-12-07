@@ -1,6 +1,7 @@
 const express = require ('express');
-const {createUser, getUserByPhone, login} = require ('../controller/user.Controller');
-const {User} = require ("../models/User")
+const {createUser, login, updateUser, Reset, newPassword, Payment} = require ('../controller/user.Controller');
+const User = require ("../models/User")
+const crypto = require ('crypto');
 const userRoute = express.Router();
 
 userRoute.get('/users', async (req, res) => {
@@ -16,8 +17,9 @@ userRoute.get('/users', async (req, res) => {
 
 
 userRoute.post('/signup', createUser);
-userRoute.get('/:phone', getUserByPhone)
 userRoute.post("/login", login)
+userRoute.put('/update/:userId', updateUser);
+
 userRoute.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -28,5 +30,12 @@ userRoute.get('/logout', (req, res) => {
     }
   });
 });
+
+
+userRoute.post('/reset', Reset);
+
+userRoute.post("/passwordReset", newPassword);
+
+
 
 module.exports = userRoute;

@@ -4,7 +4,7 @@ const {sendMessage, messages} = require ('../controller/contact.controller');
 const Router = express.Router();
 
 
-Router.post('/contact', sendMessage);
+Router.post('/send', sendMessage);
 Router.get('/messages', messages);
 
 
