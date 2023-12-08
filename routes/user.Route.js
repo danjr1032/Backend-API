@@ -1,5 +1,5 @@
 const express = require ('express');
-const {createUser, login, updateUser, Reset, newPassword, Payment} = require ('../controller/user.Controller');
+const {createUser, login, updateUser, Reset, newPassword} = require ('../controller/user.Controller');
 const User = require ("../models/User")
 const crypto = require ('crypto');
 const userRoute = express.Router();
@@ -26,6 +26,7 @@ userRoute.get('/logout', (req, res) => {
       console.error(err);
       res.status(500).send('Error logging out');
     } else {
+      res.redirect("https://trashpoint.vercel.app/Sign-in.html")
       res.send('Logged out successfully');
     }
   });

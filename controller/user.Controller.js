@@ -26,8 +26,7 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
-    // res.redirect('/dashboard');
-    res.redirect("https://trashpoint.vercel.app/dashboard.html");
+    res.redirect('https://trashpoint.vercel.app/dashboardd.html');
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
@@ -50,7 +49,6 @@ exports.updateUser = async (req, res) => {
     user.email = email;
     user.address = address;
     await user.save();
-
     res.status(200).json({ message: 'User profile updated successfully' });
   } catch (error) {
     console.error(error);
@@ -105,7 +103,7 @@ exports.login = async (req, res) => {
       _id: user._id,
       phone: user.phone,
     };
-    // res.redirect('https://trashpoint.vercel.app/dashboard.html');
+    res.redirect('https://trashpoint.vercel.app/dashboardd.html');
     res.json({ success: true, message: 'Login successful', user });
   } catch (error) {
     console.error(error);
