@@ -49,14 +49,7 @@ app.use(
   );
 
 
-const corsOptions = {
-    "origin": "http://localhost:5500",
-    "method": "POST, GET, PATCH, PUT, DELETE",
-    "preflightContinue": false,
-    "optionSuccessStatus": 204
-};
-
-
+app.use(cors('*'));
 
 app.use('/user', userRoute);
 app.use('/request',  requestRouter);
