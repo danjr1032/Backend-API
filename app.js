@@ -49,7 +49,7 @@ app.use(
   );
 
 
-app.use(cors('*'));
+app.use(cors({origin:'*'}));
 
 app.use('/user', userRoute);
 app.use('/request',  requestRouter);

@@ -155,7 +155,7 @@ exports.newPassword = async (req, res) => {
     
     user.password = hashedPassword;
     await user.save();
-    res.redirect("/user/login");
+    res.redirect("/login");
     res.send("Password reset successfully.");
   } catch (error) {
     res.status(500).send("An error occurred");

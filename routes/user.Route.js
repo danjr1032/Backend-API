@@ -35,7 +35,7 @@ userRoute.get('/logout', (req, res) => {
 
 userRoute.post('/reset', Reset);
 
-userRoute.post("/passwordReset", newPassword);
+userRoute.post("/password-reset/:userId/:token", newPassword);
 
 
 
