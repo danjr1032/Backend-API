@@ -54,8 +54,7 @@ app.use(cors('*'));
 app.use('/user', userRoute);
 app.use('/request',  requestRouter);
 app.use('/contact', Router);
-app.use('/', authRouter)
-
+app.use('/', authRouter);
 
 mongoose.connect(process.env.MONGO_URI, { 
 //     useNewUrlParser: true,
