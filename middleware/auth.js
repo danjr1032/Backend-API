@@ -22,10 +22,6 @@ authRouter.use(passport.session());
 
 
 
-
-
-
-
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
@@ -84,40 +80,3 @@ authRouter.get( '/auth/google/callback',
   
 
 module.exports = authRouter;
-
-
-// passport.use(new GoogleStrategy({
-//   clientID: process.env.CLIENT_ID,
-//   clientSecret: process.env.CLIENT_SECRET,
-//   // callbackURL: "https://trash-point.onrender.com/auth/google/callback", 
-//   callbackURL: "http://localhost:7000/auth/google/callback", 
-//   passReqToCallback: true,
-// }, (req, accessToken, refreshToken, profile, done) => {
-//   User.findOne({ googleId: profile.id }, (err, user) => {
-//     if (err) {
-//       return done(err);
-//     }
-//     if (!user) {
-//       const newUser = new User({ googleId: profile.id});
-//       newUser.save((saveErr) => {
-//         if (saveErr) {
-//           return done(saveErr);
-//         }
-//         return done(null, newUser);
-//       });
-//     } else {
-//       return done(null, user);
-//     }
-//   })
-// }
-// ));
-  
-// passport.serializeUser((user, done) => {
-//   done(null, user._id);
-// });
-
-// passport.deserializeUser((userId, done) => {
-//   User.findById(userId, (err, user) => {
-//     done(err, user);
-//   });
-// });
