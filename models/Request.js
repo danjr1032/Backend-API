@@ -1,8 +1,13 @@
+const { v4: uuidv4 } = require('uuid');
 const mongoose = require ("mongoose");
 const schema = mongoose.Schema;
 
 const requestSchema = new schema({
-
+  requestId: {
+    type: String,
+    default: uuidv4,
+    unique: true,
+  },
   requestType:{
     type: String,
     required: true
@@ -21,6 +26,11 @@ const requestSchema = new schema({
   time: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'], 
+    default: 'pending',
   },
   
 });

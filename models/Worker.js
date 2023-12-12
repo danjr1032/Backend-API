@@ -1,10 +1,9 @@
-// const { UUID } = require("mongodb");
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require ("mongoose");
 const schema = mongoose.Schema;
 
-const userSchema = new schema({
-  userId: {
+const workerSchema = new schema({
+  workerId: {
     type: String,
     default: uuidv4,
     unique: true,
@@ -17,13 +16,8 @@ const userSchema = new schema({
 
   phone: {
     type: Number,
-    required: false,
+    required: true,
     unique: true
-  },
-
-  password: {
-    type: String,
-    required: true
   },
   email: {
     type: String,
@@ -33,19 +27,11 @@ const userSchema = new schema({
     type: String,
     required: false
   },
-  isAdmin: { 
-    type: Boolean, 
-    default: false 
-  },
-  requests: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Request',
-  }],
 
 });
 
-const User = mongoose.model('User', userSchema);
+const Worker = mongoose.model('Worker', workerSchema);
 
-module.exports = User;
+module.exports = Worker;
 
 

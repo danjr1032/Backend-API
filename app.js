@@ -9,6 +9,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const userRoute = require ('./routes/user.Route');
 const requestRouter = require('./routes/request.Route');
 const Router = require ("./routes/contact.Route");
+const workerRouter = require ('./routes/workerRoute');
 const authRouter = require('./middleware/auth');
 require('dotenv').config();
 
@@ -29,9 +30,6 @@ const store = new MongoDBStore({
   store.on('error', function(error) {
     console.log(error);
   });
-
-app.use(passport.initialize());
-
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -55,6 +53,7 @@ app.use('/user', userRoute);
 app.use('/request',  requestRouter);
 app.use('/contact', Router);
 app.use('/', authRouter);
+app.use('/worker', workerRouter);
 
 
 

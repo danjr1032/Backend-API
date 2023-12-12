@@ -5,7 +5,7 @@ const Router = express.Router();
 
 
 Router.post('/send', sendMessage);
-Router.get('/messages', messages);
+Router.get('/admin/messages', messages);
 
 
 

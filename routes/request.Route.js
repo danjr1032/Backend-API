@@ -5,7 +5,9 @@ const { createRequest, getUserRequests, getAllRequests } = require('../controlle
 const requestRouter = express.Router();
 
 
+requestRouter.post('/send', createRequest);
 requestRouter.post('/send/:id', createRequest);
+requestRouter.get('/admin/getAllRequests', getAllRequests);
 requestRouter.get('/viewRequests/:id', getUserRequests);
 
 

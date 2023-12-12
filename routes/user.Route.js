@@ -1,10 +1,13 @@
 const express = require ('express');
-const {createUser, login, updateUser, Reset, newPassword} = require ('../controller/user.Controller');
+const {createUser, login, updateUser, Reset, newPassword, getUserCount, createAdmin, adminLogin, deleteUser} = require ('../controller/user.Controller');
 const User = require ("../models/User")
 const crypto = require ('crypto');
 const userRoute = express.Router();
 
-userRoute.get('/users', async (req, res) => {
+
+
+
+userRoute.get('/admin/users', async (req, res) => {
   try {
     const users = await User.find({});
     res.send({ message: 'All users', users });
@@ -26,7 +29,6 @@ userRoute.get('/logout', (req, res) => {
       console.error(err);
       res.status(500).send('Error logging out');
     } else {
-      res.redirect("https://trashpoint.vercel.app/Sign-in.html")
       res.send('Logged out successfully');
     }
   });
@@ -36,6 +38,9 @@ userRoute.get('/logout', (req, res) => {
 userRoute.post('/reset', Reset);
 
 userRoute.post("/password-reset/:userId/:token", newPassword);
+userRoute.get('/count', getUserCount);
+userRoute.post('/admin/login', adminLogin);
+userRoute.post('/admin', createAdmin);
 
 
 
