@@ -17,7 +17,7 @@ exports.sendMessage = async (req, res) => {
 
     const newMessage = new Message({ name, email, message });
     const savedMessage = await newMessage.save();
-    res.status(201).json({succcess: true, message:"Message send successfully", savedMessage});
+    res.status(201).json({success: true, message:"Message send successfully", savedMessage});
 
   } catch (error) {
 
