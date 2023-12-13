@@ -37,7 +37,7 @@ callbackURL: "https://trash-point.onrender.com/auth/google/callback",
       const newUser = new User({
         googleId: profile.id,
         password: uuidv4(), 
-        phone: profile.phone || 9010009000,
+        phone: profile.phone || "",
         email: profile.email,
         fullName: profile.displayName || '', 
       });
@@ -73,7 +73,7 @@ passport.authenticate('google', { scope:
 
 authRouter.get( '/auth/google/callback',
   passport.authenticate( 'google', {
-      successRedirect: 'https://trashpoint.vercel.app',
+      successRedirect: 'https://trashpoint.vercel.app/dashboardd.html',
       // successRedirect: '/auth/google/success',
       failureRedirect: '/auth/google/failure'
 }));

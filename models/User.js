@@ -33,6 +33,15 @@ const userSchema = new schema({
     type: String,
     required: false
   },
+  country: {
+    type: String,
+    required: false
+  },
+  state: {
+    type: String,
+    required: false
+  },
+  
   isAdmin: { 
     type: Boolean, 
     default: false 
