@@ -48,7 +48,7 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const userId = req.params.userId;
-  const { fullname, Email, State, country, Phone, Address } = req.body;
+  const { fullName, email, state, country, phone, address } = req.body;
 
   try {
     const user = await User.findOne({ userId: userId });
@@ -57,12 +57,12 @@ exports.updateUser = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    user.fullname = fullname;
-    user.Email = Email;
-    user.State = State;
+    user.fullName = fullName;
+    user.email = email;
+    user.state = state;
     user.country = country;
-    user.Phone = Phone;
-    user.Address = Address;
+    user.phone = phone;
+    user.address = address;
 
     await user.save();
     res.status(200).json({ success:true, message: 'User profile updated successfully' });
