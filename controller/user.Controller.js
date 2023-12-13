@@ -48,7 +48,7 @@ exports.createUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   const userId = req.params.userId;
-  const { fullname, email, address } = req.body;
+  const { fullname, Email, State, country, Phone, Address } = req.body;
 
   try {
     const user = await User.findOne({ userId: userId });
@@ -58,8 +58,12 @@ exports.updateUser = async (req, res) => {
     }
 
     user.fullname = fullname;
-    user.email = email;
-    user.address = address;
+    user.Email = Email;
+    user.State = State;
+    user.country = country;
+    user.Phone = Phone;
+    user.Address = Address;
+
     await user.save();
     res.status(200).json({ message: 'User profile updated successfully' });
   } catch (error) {
