@@ -65,7 +65,7 @@ exports.updateUser = async (req, res) => {
     user.Address = Address;
 
     await user.save();
-    res.status(200).json({ message: 'User profile updated successfully' });
+    res.status(200).json({ success:true, message: 'User profile updated successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -124,6 +124,7 @@ exports.login = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
+
 
 };
 
