@@ -29,7 +29,6 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
-    res.redirect("https://trashpoint.vercel.app/dashboardd.html")
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
