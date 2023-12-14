@@ -55,6 +55,7 @@ exports.updateUser = async (req, res) => {
     user.address = address;
 
     await user.save();
+    res.redirect("")
     res.status(200).json({ success:true, message: 'User profile updated successfully' });
   } catch (error) {
     console.error(error);
