@@ -16,9 +16,18 @@ exports.createRequest = async (req, res) => {
     const newRequest = new Request({ UserId: userId, requestType, location, date: isoDate, time });
     await newRequest.save();
 
-    await User.findByIdAndUpdate(userId, { $push: { requests: newRequest._id } });
-
-    res.status(201).json({ message: 'Request successful', Request: newRequest });
+    const user = await User.findByIdAndUpdate(userId, {
+      $push: { requests: newRequest._id },
+      $inc: { requestCount: 1 },
+    });
+  
+    const updatedCount = user.requestCount;
+  
+    res.status(201).json({
+      message: 'Request successful',
+      Request: newRequest,
+      requestCount: updatedCount,
+    });
   } catch (error) {
     console.error('Error sending request:', error);
     res.status(500).json({ message: 'Error sending request', error: error.message });

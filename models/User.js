@@ -50,6 +50,10 @@ const userSchema = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Request',
   }],
+  requestCount: {
+    type: Number,
+    default: 0, 
+  },
 
 });
 
