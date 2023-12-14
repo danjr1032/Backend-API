@@ -29,6 +29,7 @@ exports.createUser = async (req, res) => {
     });
 
     await newUser.save();
+    res.redirect("https://trashpoint.vercel.app/dashboardd.html")
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: 'Could not create user', error: error.message });
@@ -132,7 +133,7 @@ exports.Reset = async (req, res) => {
     if (!token) {
       token = await new Token({
         userId: user._id,
-        token: crypto.randomBytes(32).toString('hex'),
+        token: crypto.randomBytes(10).toString('hex'),
       }).save();
     }
 
