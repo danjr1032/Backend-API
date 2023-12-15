@@ -37,7 +37,7 @@ callbackURL: "https://trash-point.onrender.com/auth/google/callback",
       const newUser = new User({
         googleId: profile.id,
         password: uuidv4(), 
-        phone: profile.phone || "",
+        phone: profile.phone || "+234",
         email: profile.email,
         fullName: profile.displayName || '', 
       });
