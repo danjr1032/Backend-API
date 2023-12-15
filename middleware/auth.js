@@ -75,7 +75,8 @@ authRouter.get( '/auth/google/callback',
   passport.authenticate( 'google', {
       successRedirect: 'https://trashpoint.vercel.app/dashboardd.html',
       // successRedirect: '/auth/google/success',
-      failureRedirect: '/auth/google/failure'
+      // failureRedirect: '/auth/google/failure'
+      failureRedirect: 'Sign-in.html'
 }));
   
 
