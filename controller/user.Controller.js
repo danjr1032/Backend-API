@@ -11,13 +11,17 @@ const jwt = require('jsonwebtoken');
 
 
 exports.createUser = async (req, res) => {
-  const {fullName, phone, password } = req.body;
+  const { fullName, phone, password } = req.body;
+
+  if (!fullName || !phone || !password) {
+    return res.status(400).json({ success: false, message: 'Missing required fields' });
+  }
 
   try {
     const existingUser = await User.findOne({ phone });
 
     if (existingUser) {
-      return res.status(400).json({ message: 'User with this phone number already exists' });
+      return res.status(400).json({ success: false, message: 'User with this phone number already exists' });
     }
 
     const hashedPassword = await hashPassword(password);
@@ -31,7 +35,8 @@ exports.createUser = async (req, res) => {
     await newUser.save();
     res.status(201).json({ success: true, message: 'User created successfully', user: newUser });
   } catch (error) {
-    res.status(500).json({ message: 'Could not create user', error: error.message });
+    console.error('Error creating user:', error);
+    res.status(500).json({ success: false, message: 'Could not create user' });
   }
 };
 
